@@ -2,21 +2,18 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class TelegramUser extends Model
 {
-    protected $fillable = [
-        'telegram_id',
-        'username',
-        'first_name',
-        'last_name',
-        'language_code',
-    ];
+    use HasFactory;
+
+    protected $guarded = ['id'];
 
     public function tickets(): HasMany
     {
-        return $this->hasMany(Ticket::class);
+        return $this->hasMany(Ticket::class, 'telegram_user_id');
     }
 }

@@ -12,13 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tickets', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('telegram_user_id')
-              ->constrained('telegram_users')
-              ->cascadeOnDelete();
+            $table->uuid('id')->primary(); // <--- ОБЯЗАТЕЛЬНО UUID
+            $table->foreignId('telegram_user_id')->constrained('telegram_users')->cascadeOnDelete();
             $table->bigInteger('topic_id')->nullable()->index();
-            $table->string('status')->default('open')->index(); // open, closed
-            $table->string('subject')->nullable(); // Тема обращения
+            $table->string('status')->default('open')->index();
+            $table->string('subject')->nullable();
             $table->timestamps();
         });
     }

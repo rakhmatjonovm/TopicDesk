@@ -15,6 +15,10 @@ class TicketMessage extends Model
         'payload',
     ];
 
+    protected $casts = [
+        'payload' => 'array',
+    ];
+
     public function ticket()
     {
         return $this->belongsTo(Ticket::class);
